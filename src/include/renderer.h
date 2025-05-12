@@ -11,10 +11,10 @@ typedef struct {
   Camera3D camera;
 } Renderer;
 
-Renderer *renderer_create(int width, int height);
+Renderer renderer_create(int width, int height);
 
-void renderer_render(Renderer *r);
+void renderer_render(Renderer *r, AppState *state);
 
-void renderer_destroy(Renderer *r, AppState *state);
+void renderer_destroy(Renderer *r);
 
 int renderer_should_close(Renderer *r);
