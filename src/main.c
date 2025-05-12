@@ -1,68 +1,37 @@
-#include "include/SGP4.h"
-#include "include/TLE.h"
-#include "include/renderer.h"
-#include <raylib.h>
+#include "include/satellite.h"
+#include "include/state.h"
 #include <stdio.h>
-
+#include <stdlib.h>
 #define SCREENWIDTH 800
 #define SCREENHEIGHT 800
 
 int main() {
 
-  InitWindow(SCREENWIDTH, SCREENHEIGHT,
-             "raylib [core] example - 3d camera free");
+  // create app state
 
-  Vector3 cubePosition = {0.0f, 0.0f, 0.0f};
+  AppState state;
 
-  Camera3D camera = {0};
-  camera.position = (Vector3){15.0f, 15.0f, 15.0f}; // Camera position
-  camera.target = (Vector3){0.0f, 0.0f, 0.0f};      // Camera looking at point
-  camera.up =
-      (Vector3){0.0f, 1.0f, 0.0f}; // Camera up vector (rotation towards target)
-  camera.fovy = 45.0f;             // Camera field-of-view Y
-  camera.projection = CAMERA_PERSPECTIVE; // Camera projection type
+  Satellite *satellites =
+      get_satellites_from_file("../data/fetched.txt", &state.sat_count);
 
-  DisableCursor(); // Limit cursor to relative movement inside the window
+  double r[3], v[3];
 
-  SetTargetFPS(60); // Set our game to run at 60 frames-per-second
+  for (int i = 0; i < state.sat_count; i++) {
+    getRV(&(satellites[i].tle), 0.0, r, v);
 
-  // Main game loop
-  while (!WindowShouldClose()) // Detect window close button or ESC key
-  {
-    // Update
-    UpdateCamera(&camera, CAMERA_ORBITAL);
-
-    if (IsKeyPressed('Z'))
-      camera.target = (Vector3){0.0f, 0.0f, 0.0f};
-
-    BeginDrawing();
-
-    // XXX Draw
-
-    ClearBackground(BLACK);
-
-    BeginMode3D(camera);
-
-    DrawGrid(60, 1.0f);
-
-    DrawSphereWires(cubePosition, 4, 20, 20, GREEN);
-
-    // XXX Stop drawing
-
-    EndMode3D();
-
-    DrawText("Free camera default controls:", 20, 20, 10, BLACK);
-    DrawText("- Mouse Wheel to Zoom in-out", 40, 40, 10, DARKGRAY);
-    DrawText("- Mouse Wheel Pressed to Pan", 40, 60, 10, DARKGRAY);
-    DrawText("- Z to zoom to (0, 0, 0)", 40, 80, 10, DARKGRAY);
-
-    EndDrawing();
-    //----------------------------------------------------------------------------------
+    printf("\nSatellite: %s\n", satellites[i].name);
+    printf("Position (km): [%.6f, %.6f, %.6f]\n", r[0], r[1], r[2]);
+    printf("Velocity (km/s): [%.6f, %.6f, %.6f]\n", v[0], v[1], v[2]);
   }
 
-  // De-Initialization
-  //--------------------------------------------------------------------------------------
-  CloseWindow(); // Close window and OpenGL context
-  //--------------------------------------------------------------------------------------
+  // fetch data process data
+  // start up rendering
+  // render loop
+  // cleanup
+
+  for (int i = 0; i < state.sat_count; i++) {
+    free(&satellites[i]);
+  }
+
   return 0;
 }

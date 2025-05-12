@@ -1,7 +1,6 @@
-#include "../include/TLE.h"
-#include "../include/SGP4.h"
+#include "include/TLE.h"
+#include "include/SGP4.h"
 #include <math.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 

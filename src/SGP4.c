@@ -1,6 +1,5 @@
-#include "../include/SGP4.h"
+#include "include/SGP4.h"
 #include <math.h>
-#include <stdio.h>
 
 /*     ----------------------------------------------------------------
  *
