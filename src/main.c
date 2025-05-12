@@ -25,7 +25,7 @@ int main() {
   AppState state;
 
   Satellite *satellites =
-      get_satellites_from_file("../data/fetched.txt", &state.sat_count);
+      get_satellites_from_file("data/fetched.txt", &state.sat_count);
 
   long now = current_millis();
 

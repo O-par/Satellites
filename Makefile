@@ -1,40 +1,14 @@
-# Compiler
-CC = gcc
+BIN_DIR = bin
+APP = $(BIN_DIR)/app
 
-# Directories
-SRC_DIR = src
-OBJ_DIR = build
-BIN = app
+run: $(APP)
+	./$(APP)
 
-# Source files
-SRCS = $(SRC_DIR)/main.c
+$(APP):
+	mkdir -p $(BIN_DIR)
+	gcc -Isrc/include src/main.c src/satellite.c src/fetch.c src/util.c src/renderer.c src/TLE.c src/SGP4.c -o $(APP) -lcurl -lraylib -lm
 
-# Output object files
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-
-# Compiler and linker flags
-CFLAGS = -Wall -std=c99
-LDFLAGS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
-
-# Default target
-all: $(BIN)
-
-# Link
-$(BIN): $(OBJS)
-	$(CC) $^ -o $@ $(LDFLAGS)
-
-# Compile source files to object files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Run app
-run: app
-	./app
-
-
-# Clean up
 clean:
-	rm -rf $(OBJ_DIR) $(BIN)
+	rm -rf $(BIN_DIR)
 
-.PHONY: all clean
+.PHONY: run clean
