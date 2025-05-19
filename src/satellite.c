@@ -17,7 +17,10 @@ Satellite create_sat_from_tle(char *name, char *line1, char *line2) {
 
   Satellite sat = {.tle = tle, .epoch = tle.epoch, .trail_count = 0};
   strncpy(sat.objectID, tle.objectID, sizeof(sat.objectID));
+
+  trim_trailing_spaces(name);
   strncpy(sat.name, name, sizeof(sat.name));
+  sat.name[sizeof(sat.name) - 1] = '\0';
   return sat;
 };
 

@@ -31,15 +31,15 @@ int main() {
 
   state.satellites = satellites;
   double r[3], v[3];
-  for (int i = 0; i < state.sat_count; i++) {
+  for (int i = 0; i < state.sat_count / 9; i++) {
     double min_after_epoch = (now - satellites[i].tle.epoch) / 60000.0;
     getRV(&(satellites[i].tle), min_after_epoch, r, v);
 
     satellites[i].position_ECI = (Vector3){r[0] / 200, r[2] / 200, -r[1] / 200};
 
     printf("\nSatellite: %s\n", satellites[i].name);
-    printf("Position (km): [%.6f, %.6f, %.6f]\n", r[0], r[1], r[2]);
-    printf("Velocity (km/s): [%.6f, %.6f, %.6f]\n", v[0], v[1], v[2]);
+    printf("Position (km): [%.3f, %.3f, %.3f]\n", r[0], r[1], r[2]);
+    printf("Velocity (km/s): [%.3f, %.3f, %.3f]\n", v[0], v[1], v[2]);
   }
 
   // fetch data process data
