@@ -1,39 +1,62 @@
-# 🚀 Satellite Visualizer - MVP Implementation Checklist
+# Satellite Visualizer
 
-## 🛠️ Phase 1: Core Infrastructure
-- [ ] Set up a C project structure with `main.c` and simple build system (e.g., Makefile)
-- [ ] Integrate Raylib and create a basic 3D window with a camera
-- [ ] Load and render a simple Earth sphere (`GenMeshSphere` + `DrawModel`)
+A lightweight C application that reads TLE data, calculates satellite positions using the SGP4 algorithm, and renders them in real time with Raylib.
 
-## 🛰️ Phase 2: Satellite Data Input
-- [ ] Write a Python script to fetch TLEs from Celestrak
-- [ ] Parse the TLEs into structs (`tle_t`) and serialize them to a `.bin` file
-- [ ] In C, write a loader to read the `.bin` file into a `tle_t[]` array
+## Features
 
-## 🧮 Phase 3: Orbit Propagation
-- [ ] Integrate a C implementation of the SGP4 algorithm (e.g., Vallado or libsgp4)
-- [ ] For each satellite, compute its position (ECI) based on current time
-- [ ] Store results in a `satellite_t` struct with position and velocity
+- TLE parsing from file (name + 2 lines per satellite)
+- Real-time orbital position updates (SGP4-based, WIP)
+- Basic 2D visualization with zoom/camera controls
+- Modular C codebase (TLE, SGP4, rendering separated)
 
-## 🌍 Phase 4: Visualization
-- [ ] For each satellite, draw a small sphere at its computed position
-- [ ] Color them all the same for now
-- [ ] Use `Camera3D` controls to move around and inspect the scene
+## How It Works
 
-## 🕒 Phase 5: Real-Time Clock + Prediction Mode
-- [ ] Add a simulation clock based on UTC or system time
-- [ ] Allow toggling between real-time and "predict mode" (keyboard toggle)
-- [ ] In predict mode, allow moving a time slider with left/right arrows (+/- minutes)
+1. Reads satellites from a TLE file (3 lines per object).
+2. Parses each into a struct and computes position (SGP4 in progress).
+3. Renders names and coordinates using Raylib.
+4. Basic debug info shown on screen.
 
-## 💡 Phase 6: Quality-of-Life Improvements
-- [ ] Display basic text UI (e.g., number of satellites, current mode, time offset)
-- [ ] Print satellite name and info on keypress or hover (basic)
-- [ ] Cap number of satellites (e.g., 500) to maintain performance while testing
+## Evolution/Progress track pictures of project:
 
----
+Early rendering tests
 
-## 🎯 MVP Milestone Reached
-- [ ] A spinning Earth
-- [ ] Real satellites in correct 3D orbits
-- [ ] Real-time or predicted positions
-- [ ] A fast, responsive app with minimal dependencies
+![image](https://github.com/user-attachments/assets/5e211dae-9248-4f7c-911a-ffbc5826a77b)
+
+Trail of newly launched starlink satellites 
+
+![image](https://github.com/user-attachments/assets/3dbed713-2661-4bd3-9e83-2e5af5721922)
+
+
+## Requirements
+
+- Raylib (v4.5+)
+- GCC or Clang
+- `make`
+- Optional: `curl` (for future remote fetching)
+
+## Known Issues
+
+- TLE file must have line count divisible by 3.
+- SGP4 still under development.
+- Some TLEs may not parse or propagate correctly.
+
+## Credits
+
+- SGP4: Vallado/Kelso public-domain models  
+- Raylib: Rendering and window management  
+- Written in C for performance and control
+
+## License
+
+MIT License
+
+## Disclaimer
+
+This tool is for educational use only.  
+Do **not** use it for real-world satellite tracking or commercial orbit propagation.  
+SGP4 was developed by the U.S. Air Force and is provided here without any guarantees of accuracy or fitness for operational use.  
+Use at your own risk.
+
+
+
+
