@@ -24,7 +24,7 @@ Early rendering tests
 
 Trail of newly launched starlink satellites 
 
-![image](https://github.com/user-attachments/assets/3dbed713-2661-4bd3-9e83-2e5af5721922)
+![image](https://github.com/user-attachments/assets/32fc949e-7b03-4249-aa60-e0a40df65348)
 
 
 ## Requirements
