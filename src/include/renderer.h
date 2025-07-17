@@ -9,6 +9,7 @@ typedef struct {
   int screen_width;
   int screen_height;
   Camera3D camera;
+  Model earth;
 } Renderer;
 
 Renderer renderer_create(int width, int height);

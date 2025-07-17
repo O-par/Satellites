@@ -2,6 +2,7 @@
 #include <curl/curl.h>
 #include <curl/easy.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 char *URL_from_set(enum SAT_SETS set) {
   switch (set) {
@@ -45,8 +46,12 @@ void fetch_data(enum SAT_SETS set) {
 
   curl = curl_easy_init();
   // write to file in binary
-  FILE *fp = fopen("../data/fetched.txt", "wb");
-
+  FILE *fp = fopen("data/fetched.txt", "wb");
+  if (!fp) {
+    exit(1);
+    perror("Failed to open file for writing");
+    return;
+  }
   if (curl) {
     curl_easy_setopt(curl, CURLOPT_URL, URL);
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
