@@ -20,11 +20,15 @@ A lightweight C application that reads TLE data, calculates satellite positions 
 
 Early rendering tests
 
-![image](https://github.com/user-attachments/assets/5e211dae-9248-4f7c-911a-ffbc5826a77b)
+<img width="1922" height="1119" alt="Screenshot from 2025-07-22 15-21-25" src="https://github.com/user-attachments/assets/09d9fac6-8c07-4b9b-b8af-38dd9284fd38" />
+
 
 Trail of newly launched starlink satellites 
 
 ![image](https://github.com/user-attachments/assets/32fc949e-7b03-4249-aa60-e0a40df65348)
+
+<img width="1922" height="1119" alt="Screenshot from 2025-07-22 15-23-13" src="https://github.com/user-attachments/assets/c4c2f71a-e3bf-4690-83e9-9d4e2af2c643" />
+
 
 
 ## Requirements
