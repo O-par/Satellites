@@ -1,6 +1,7 @@
-#include "include/satellite.h"
-#include "include/TLE.h"
-#include "include/util.h"
+#include "satellite.h"
+#include "TLE.h"
+#include "state.h"
+#include "util.h"
 #include <raylib.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -61,13 +62,6 @@ Satellite *get_satellites_from_file(char *filepath, int *s_count) {
     tle1[strcspn(tle1, "\n")] = '\0';
     tle2[strcspn(tle2, "\n")] = '\0';
 
-    /*
-    // Validation
-    if (line1[0] != '1' || line2[0] != '2') {
-      fprintf(stderr, "[Warning] Skipping malformed TLE at index %d\n", i);
-      continue;
-    }
-    */
     Satellite t_sat = create_sat_from_tle(name, tle1, tle2);
 
     printf("\nName: %s", t_sat.name);
@@ -84,4 +78,25 @@ Satellite *get_satellites_from_file(char *filepath, int *s_count) {
   }
   *s_count = i;
   return sats;
+}
+
+void init_satellite_positions(AppState *state) {
+  Satellite *satellites =
+      get_satellites_from_file("data/fetched.txt", &state->sat_count);
+
+  long now = current_millis();
+
+  state->satellites = satellites;
+  double r[3], v[3];
+  for (int i = 0; i < state->sat_count / 9; i++) {
+    double min_after_epoch = (now - satellites[i].tle.epoch) / 60000.0;
+    getRV(&(satellites[i].tle), min_after_epoch, r, v);
+
+    satellites[i].position_ECI =
+        (Vector3){(r[0] / 200), (r[2] / 200), (-r[1] / 200)};
+
+    printf("\nSatellite: %s\n", satellites[i].name);
+    printf("Position (km): [%.3f, %.3f, %.3f]\n", r[0], r[1], r[2]);
+    printf("Velocity (km/s): [%.3f, %.3f, %.3f]\n", v[0], v[1], v[2]);
+  }
 }

@@ -6,7 +6,7 @@ run: $(APP)
 
 $(APP):
 	mkdir -p $(BIN_DIR)
-	gcc -Isrc/include src/main.c src/satellite.c src/fetch.c src/util.c src/renderer.c src/TLE.c src/SGP4.c -o $(APP) -lcurl -lraylib -lm
+	gcc -Iinclude src/main.c src/satellite.c src/fetch.c src/util.c src/renderer.c src/TLE.c src/SGP4.c -o $(APP) -lcurl -lraylib -lm
 
 clean:
 	rm -rf $(BIN_DIR)

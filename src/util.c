@@ -1,4 +1,17 @@
-#include "include/util.h"
+#include "util.h"
+
+double get_minutes_since_epoch(long epoch_ms) {
+  struct timespec ts;
+  clock_gettime(CLOCK_REALTIME, &ts);
+  long now = ts.tv_sec * 1000L + ts.tv_nsec / 1000000L;
+  return (now - epoch_ms) / 60000.0;
+}
+
+long current_millis() {
+  struct timespec ts;
+  clock_gettime(CLOCK_REALTIME, &ts);
+  return (long)(ts.tv_sec * 1000L + ts.tv_nsec / 1000000L);
+}
 
 void trim_trailing_spaces(char *str) {
   size_t len = strlen(str);

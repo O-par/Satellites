@@ -1,0 +1,93 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "bin/app",
+      "src/main.c"
+    ],
+    "directory": "/home/oscar/Satellites/Satellites",
+    "file": "/home/oscar/Satellites/Satellites/src/main.c",
+    "output": "/home/oscar/Satellites/Satellites/bin/app"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "bin/app",
+      "src/satellite.c"
+    ],
+    "directory": "/home/oscar/Satellites/Satellites",
+    "file": "/home/oscar/Satellites/Satellites/src/satellite.c",
+    "output": "/home/oscar/Satellites/Satellites/bin/app"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "bin/app",
+      "src/fetch.c"
+    ],
+    "directory": "/home/oscar/Satellites/Satellites",
+    "file": "/home/oscar/Satellites/Satellites/src/fetch.c",
+    "output": "/home/oscar/Satellites/Satellites/bin/app"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "bin/app",
+      "src/util.c"
+    ],
+    "directory": "/home/oscar/Satellites/Satellites",
+    "file": "/home/oscar/Satellites/Satellites/src/util.c",
+    "output": "/home/oscar/Satellites/Satellites/bin/app"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "bin/app",
+      "src/renderer.c"
+    ],
+    "directory": "/home/oscar/Satellites/Satellites",
+    "file": "/home/oscar/Satellites/Satellites/src/renderer.c",
+    "output": "/home/oscar/Satellites/Satellites/bin/app"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "bin/app",
+      "src/TLE.c"
+    ],
+    "directory": "/home/oscar/Satellites/Satellites",
+    "file": "/home/oscar/Satellites/Satellites/src/TLE.c",
+    "output": "/home/oscar/Satellites/Satellites/bin/app"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "bin/app",
+      "src/SGP4.c"
+    ],
+    "directory": "/home/oscar/Satellites/Satellites",
+    "file": "/home/oscar/Satellites/Satellites/src/SGP4.c",
+    "output": "/home/oscar/Satellites/Satellites/bin/app"
+  }
+]

@@ -1,5 +1,5 @@
-#include "include/TLE.h"
-#include "include/SGP4.h"
+#include "TLE.h"
+#include "SGP4.h"
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
