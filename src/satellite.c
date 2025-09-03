@@ -100,3 +100,21 @@ void init_satellite_positions(AppState *state) {
     printf("Velocity (km/s): [%.3f, %.3f, %.3f]\n", v[0], v[1], v[2]);
   }
 }
+
+void calc_positions(AppState *state) {
+
+  long now_ms = current_millis();
+  double elapsed_minutes = (now_ms - state->start_time_ms) / 60000.0;
+  double scaled_time = elapsed_minutes * state->time_scale;
+  for (int i = 0; i < state->sat_count; i++) {
+    double epoch_minutes =
+        (state->start_time_ms - state->satellites[i].tle.epoch) / 60000.0;
+    double minutes_since_epoch = scaled_time + epoch_minutes;
+
+    double r[3], v[3];
+    getRV(&state->satellites[i].tle, minutes_since_epoch, r, v);
+
+    state->satellites[i].position_ECI = (Vector3){
+        (float)(r[0] / 200), (float)(r[2] / 200), (float)(-r[1] / 200)};
+  }
+}

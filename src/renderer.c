@@ -60,12 +60,12 @@ void renderer_render(Renderer *r, AppState *state) {
   snprintf(txt, sizeof(txt), "Number of satellites being rendered: %d",
            state->sat_count);
   DrawText(txt, 20, 120, 25, RAYWHITE);
-  for (int i = 0; i < state->sat_count; i++) {
-    Vector3 pos = state->satellites[i].position_ECI;
-    Vector2 text_pos =
-        GetWorldToScreen((Vector3){pos.x, pos.y + 2.5f, pos.z}, r->camera);
-    DrawText(state->satellites[i].name, text_pos.x, text_pos.y, 8, GREEN);
-  }
+  // for (int i = 0; i < state->sat_count; i++) {
+  //   Vector3 pos = state->satellites[i].position_ECI;
+  //   Vector2 text_pos =
+  //       GetWorldToScreen((Vector3){pos.x, pos.y + 2.5f, pos.z}, r->camera);
+  //   DrawText(state->satellites[i].name, text_pos.x, text_pos.y, 8, GREEN);
+  // }
 
   EndDrawing();
 }

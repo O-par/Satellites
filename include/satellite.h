@@ -17,6 +17,7 @@ typedef struct {
 } Satellite;
 
 void init_satellite_positions(AppState *state);
+void calc_positions(AppState *state);
 Satellite create_sat_from_tle(char *name, char *line1, char *line2);
 Satellite *get_satellites_from_file(char *filepath, int *sat_count);
 void delete_sat(Satellite *sat);
