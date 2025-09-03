@@ -1,9 +1,9 @@
+#include "constants.h"
 #include "renderer.h"
 #include "satellite.h"
 #include "state.h"
 #include <raylib.h>
-#define SCREENWIDTH 800
-#define SCREENHEIGHT 800
+#include <stdio.h>
 
 int main() {
 
@@ -15,14 +15,16 @@ int main() {
 
   AppState state;
   init_satellite_positions(&state);
-  init_state(&state);
+  init_state(&state, -1);
 
-  Renderer renderer = renderer_create(1920, 1080);
-  DisableCursor();
+  Renderer renderer = renderer_create(SCREENWIDTH, SCREENHEIGHT);
+  // DisableCursor();
 
   while (!WindowShouldClose()) {
 
     calc_positions(&state);
+
+    GUI_render(&renderer, &state);
 
     renderer_render(&renderer, &state);
   }

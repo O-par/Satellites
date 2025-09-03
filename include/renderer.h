@@ -19,3 +19,7 @@ void renderer_render(Renderer *r, AppState *state);
 void renderer_destroy(Renderer *r);
 
 int renderer_should_close(Renderer *r);
+
+// GUI
+
+void GUI_render(Renderer *r, AppState *state);
