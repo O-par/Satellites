@@ -2,6 +2,10 @@
 
 A lightweight C application that reads TLE data, calculates satellite positions using the SGP4 algorithm, and renders them in real time with Raylib.
 
+* I plan on refactoring this project into a fully fledged C++ application because 
+  over time I realise the needs of this and my ability to structure code could 
+  benefit from generics/object oriented concepts * 
+
 ## Features
 
 - TLE parsing from file (name + 2 lines per satellite)
