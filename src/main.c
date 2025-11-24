@@ -13,6 +13,8 @@ int main() {
   // start up rendering
   // render loop
 
+  fetch_data(ACTIVE);
+
   AppState state;
   init_satellite_positions(&state);
   init_state(&state);
