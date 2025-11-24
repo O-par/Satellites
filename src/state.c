@@ -6,7 +6,7 @@ void init_state(AppState *state, enum SAT_SETS set) {
   state->start_time_ms = current_millis();
   state->fetch = false;
   state->sat_names = false;
-
+  state->gui_active = false;
   if (state->fetch && set != -1) {
 
     fetch_data(set);

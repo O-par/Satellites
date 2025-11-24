@@ -19,7 +19,7 @@ Renderer renderer_create(int width, int height) {
                            .target = (Vector3){0.0f, 0.0f, 0.0f},
                            .up = (Vector3){0.0f, 1.0f, 0.0f},
                            .fovy = 80.0f,
-                           .projection = CAMERA_PERSPECTIVE}};
+                           .projection = CAMERA_CUSTOM}};
 
   InitWindow(r.screen_width, r.screen_height, APP_TITLE);
   SetTargetFPS(60);
@@ -56,14 +56,15 @@ void renderer_render(Renderer *r, AppState *state) {
 
   EndMode3D();
   DrawFPS(GetScreenWidth() - 100, 10);
-  DrawText("Free camera default controls:", 20, 20, 20, RAYWHITE);
-  DrawText("- Mouse Wheel to Zoom in-out", 40, 50, 20, DARKGRAY);
-  DrawText("- Mouse Wheel Pressed to Pan", 40, 70, 20, DARKGRAY);
-  DrawText("- Z to zoom to (0, 0, 0)", 40, 90, 20, DARKGRAY);
+  DrawText("Free camera default controls:", 20, 30, 20, RAYWHITE);
+  DrawText("- Mouse Wheel to Zoom in-out", 40, 60, 20, DARKGRAY);
+  DrawText("- Mouse Wheel Pressed to Pan", 40, 80, 20, DARKGRAY);
+  DrawText("- Z to zoom to (0, 0, 0)", 40, 100, 20, DARKGRAY);
+  DrawText("- E to activate GUI", 40, 120, 20, DARKGRAY);
   char txt[100];
   snprintf(txt, sizeof(txt), "Number of satellites being rendered: %d",
            state->sat_count);
-  DrawText(txt, 20, 120, 25, RAYWHITE);
+  DrawText(txt, 20, 150, 23, RAYWHITE);
 
   if (state->sat_names) {
     for (int i = 0; i < state->sat_count; i++) {

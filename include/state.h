@@ -10,6 +10,7 @@ typedef struct AppState {
   int sat_count;
   double time_scale;
   double start_time_ms;
+  bool gui_active;
   bool sat_names;
   bool sat_trails;
   bool app_running;

@@ -24,7 +24,17 @@ int main() {
 
     calc_positions(&state);
 
-    GUI_render(&renderer, &state);
+    if (IsKeyPressed(KEY_E)) {
+      state.gui_active = !state.gui_active;
+    }
+    if (state.gui_active) {
+      EnableCursor();
+
+      GUI_render(&renderer, &state);
+
+    } else {
+      DisableCursor();
+    }
 
     renderer_render(&renderer, &state);
   }
