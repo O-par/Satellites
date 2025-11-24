@@ -4,6 +4,7 @@
 #include "state.h"
 #include <raylib.h>
 #include <raymath.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #define RAYGUI_IMPLEMENTATION
@@ -15,15 +16,15 @@
 Renderer renderer_create(int width, int height) {
   Renderer r = {.screen_width = width,
                 .screen_height = height,
-                .camera = {.position = (Vector3){100.0f, 100.0f, 100.0f},
+                .camera = {.position = (Vector3){50.0f, 50.0f, 50.0f},
                            .target = (Vector3){0.0f, 0.0f, 0.0f},
                            .up = (Vector3){0.0f, 1.0f, 0.0f},
                            .fovy = 80.0f,
-                           .projection = CAMERA_CUSTOM}};
+                           .projection = CAMERA_PERSPECTIVE}};
 
   InitWindow(r.screen_width, r.screen_height, APP_TITLE);
-  SetTargetFPS(60);
-
+  SetTargetFPS(120);
+  SetMouseCursor(MOUSE_CURSOR_DEFAULT);
   r.earth = LoadModel("models/Earth_1_12756.glb");
   if (r.earth.meshCount == 0) {
     printf("Error loading model");
@@ -35,13 +36,22 @@ Renderer renderer_create(int width, int height) {
 }
 
 void renderer_render(Renderer *r, AppState *state) {
-  UpdateCamera(&r->camera, CAMERA_FREE);
+
+  if (IsKeyPressed(KEY_E)) {
+    state->gui_active = !state->gui_active;
+  }
 
   if (IsKeyPressed(KEY_Z)) {
     r->camera.target = (Vector3){0.0f, 0.0f, 0.0f};
   }
 
+  if (!state->gui_active) {
+    // DisableCursor();
+    UpdateCamera(&r->camera, CAMERA_FREE);
+  }
+
   BeginDrawing();
+
   ClearBackground(BLACK);
 
   BeginMode3D(r->camera);
@@ -55,6 +65,11 @@ void renderer_render(Renderer *r, AppState *state) {
   DrawModel(r->earth, (Vector3){0, 0, 0}, EARTH_SCALE, WHITE);
 
   EndMode3D();
+
+  if (state->gui_active) {
+    GUI_render(r, state);
+  }
+
   DrawFPS(GetScreenWidth() - 100, 10);
   DrawText("Free camera default controls:", 20, 30, 20, RAYWHITE);
   DrawText("- Mouse Wheel to Zoom in-out", 40, 60, 20, DARKGRAY);
@@ -79,9 +94,8 @@ void renderer_render(Renderer *r, AppState *state) {
 }
 
 void GUI_render(Renderer *r, AppState *state) {
-
-  GuiCheckBox((Rectangle){SCREENWIDTH - 200, 100, 70, 70},
-              "Draw Satellite Trails", &state->sat_names);
+  GuiCheckBox((Rectangle){SCREENWIDTH - 200, 100, 20, 20},
+              "Draw Satellite Names", &state->sat_names);
 }
 
 void renderer_destroy(Renderer *r) {
